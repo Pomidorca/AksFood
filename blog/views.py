@@ -2,19 +2,58 @@ from django.shortcuts import render
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Recipe, Category
+from django.core.paginator import Paginator
 
 
 def index(request):
-    recipes = Recipe.objects.all()
-    category = Category.objects.all()
+    # часть кода для пгинации
+    recipe_list = Recipe.objects.all()
+    paginator = Paginator(recipe_list, 6)  # 6 хреновин на странице
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    # Конец части кода, ответственной за пагинацию
+    categorys = Category.objects.all()
     count = len(Recipe.objects.all()) - 1
+    gallery = Recipe.objects.order_by('image2')[:9] # 9 изображений для галереи
     if count >= 2:
         product1 = Recipe.objects.all()[count]
         product2 = Recipe.objects.all()[count - 1]
         product3 = Recipe.objects.all()[count - 2]
-        return render(request, 'blog/garden-index.html', {'category': category, 'recipes': recipes,
+        return render(request, 'blog/garden-index.html', {'categorys': categorys, 'page_obj': page_obj,
                                                           'product1': product1, 'product2': product2,
-                                                          'product3': product3})
+                                                          'product3': product3, "gallery": gallery})
     else:
         print('нет рецептов')
-    return render(request, 'blog/garden-index.html', {'category': category, 'recipes': recipes})
+    return render(request, 'blog/garden-index.html', {'categorys': categorys, 'page_obj': page_obj, "gallery": gallery})
+
+
+def category_recipes(request, category_id):
+    all_category = Category.objects.all()
+    category = get_object_or_404(Category, pk=category_id)
+    recipes = Recipe.objects.filter(category=category)
+    paginator = Paginator(recipes, 10)  # 10 рецептов на странице
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    count = len(Recipe.objects.all()) - 1
+    gallery = Recipe.objects.order_by('image2')[:9]  # 9 изображений для галереи
+    if count >= 2:
+        product1 = Recipe.objects.all()[count]
+        product2 = Recipe.objects.all()[count - 1]
+        product3 = Recipe.objects.all()[count - 2]
+        return render(request, 'blog/garden-category.html', {
+            'category': category,
+            'all_category': all_category,
+            'page_obj': page_obj,
+            "gallery": gallery,
+            'product1': product1, 'product2': product2, 'product3': product3,
+        })
+    else:
+        print('нет рецептов')
+        return render(request, 'blog/garden-category.html', {
+            'category': category,
+            'all_category': all_category,
+            'page_obj': page_obj,
+            "gallery": gallery,
+        })
+def add_post(request):
+    return render(request, 'blog/garden-contact.html')

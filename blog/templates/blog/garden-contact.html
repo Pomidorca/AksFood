@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html lang="ru">
 
     <!-- Basic -->
     <meta charset="utf-8">
@@ -9,40 +10,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Site Metas -->
-    <title>Forest Time - Stylish Magazine Blog Template</title>
+    <title>AksFood</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
     
     <!-- Site Icons -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="shortcut icon" href="{% static 'blog/images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'blog/images/apple-touch-icon.png' %}">
     
     <!-- Design fonts -->
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet"> 
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="{% static 'blog/css/bootstrap.css'  %}" rel="stylesheet">
 
     <!-- FontAwesome Icons core CSS -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static 'blog/css/font-awesome.min.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="style.css" rel="stylesheet">
+    <link href="{% static 'blog/style.css' %}" rel="stylesheet">
 
     <!-- Responsive styles for this template -->
-    <link href="css/responsive.css" rel="stylesheet">
+    <link href="{% static 'blog/css/responsive.css' %}" rel="stylesheet">
 
     <!-- Colors for this template -->
-    <link href="css/colors.css" rel="stylesheet">
+    <link href="{% static 'blog/css/colors.css' %}" rel="stylesheet">
 
     <!-- Version Garden CSS for this template -->
-    <link href="css/version/garden.css" rel="stylesheet">
+    <link href="{% static 'blog/css/version/garden.css' %}" rel="stylesheet">
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
+
 
 </head>
 <body>
@@ -52,12 +51,12 @@
             <div class="card card-block">
                 <div class="newsletter-widget text-center">
                     <form class="form-inline">
-                        <input type="text" class="form-control" placeholder="What you are looking for?">
+                        <input type="text" class="form-control" placeholder="Что хотите найти?">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                     </form>
-                </div><!-- end newsletter -->
+                </div>
             </div>
-        </div><!-- end top-search -->
+        </div>
 
         <div class="topbar-section">
             <div class="container-fluid">
@@ -71,32 +70,32 @@
                             <a href="https://vk.com/stu_unger" data-toggle="tooltip" data-placement="bottom" title="Flickr"><i class="fa fa-flickr"></i></a>
                             <a href="https://vk.com/stu_unger" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
                             <a href="https://vk.com/stu_unger" data-toggle="tooltip" data-placement="bottom" title="Google+"><i class="fa fa-google-plus"></i></a>
-                        </div><!-- end social -->
-                    </div><!-- end col -->
+                        </div>
+                    </div>
 
                     <div class="col-lg-4 hidden-md-down">
-                    </div><!-- end col -->
+                    </div>
 
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="topsearch text-right">
-                            <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search"></i> Search</a>
-                        </div><!-- end search -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end header-logo -->
-        </div><!-- end topbar -->
+                            <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search"></i> Поиск</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="header-section">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="logo">
-                            <a href="garden-index.html"><img src="images/AksFood.png" alt=""></a>
-                        </div><!-- end logo -->
+                             <a href=""><img src="{% static 'blog/images/AksFood.png' %}" alt=""></a>
+                        </div>
                     </div>
-                </div><!-- end row -->
-            </div><!-- end header-logo -->
-        </div><!-- end header -->
+                </div>
+            </div>
+        </div>
 
         <header class="header">
             <div class="container">
@@ -107,30 +106,29 @@
                     <div class="collapse navbar-collapse justify-content-md-center" id="Forest Timemenu">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" href="garden-index.html">Главная</a>
+                                <a class="nav-link color-green-hover" href="/">Главная</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" href="garden-category.html">Завтраки/напитки</a>
+                                <a class="nav-link color-green-hover" href="{% url 'category_recipes' 1 %}">Завтраки/напитки</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" href="garden-category.html">Основные блюда</a>
+                                <a class="nav-link color-green-hover" href="{% url 'category_recipes' 2 %}">Основные блюда</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" href="garden-category.html">Десерты/выпечка</a>
+                                <a class="nav-link color-green-hover" href="{% url 'category_recipes' 3 %}">Десерты/выпечка</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" href="garden-category.html">Закуски/салаты</a>
-                            </li>  
+                                <a class="nav-link color-green-hover" href="{% url 'category_recipes' 4 %}">Закуски/салаты</a>
+                            </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" href="garden-contact.html">Добавить пост</a>
+                                <a class="nav-link color-green-hover" href="{% url 'add_post' %}">Добавить пост</a>
                             </li>
                         </ul>
                     </div>
                 </nav>
-            </div><!-- end container -->
-        </header><!-- end header -->
+            </div>
+        </header>
 
-        <div id="map"></div>
  
         <section class="section wb">
             <div class="container">
@@ -138,21 +136,20 @@
                     <div class="col-lg-10 offset-lg-1">
                         <div class="page-wrapper">
                             <div class="row">
+                                  <div class="col-lg-4">
+                                    <h4>Появились вопросы?</h4>
+                                    <p>Если у вас возникли вопросы или нужна дополнительная информация о наших рецептах, функциональности сайта или чем-то ещё, не стесняйтесь обращаться. Мы готовы помочь вам разобраться и получить нужную информацию.</p>
+                                </div>
                                 <div class="col-lg-4">
-                                    <h4>Who we are</h4>
-                                    <p>Forest Time is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
+                                    <h4>Хочешь добавить пост?</h4>
+                                    <p>Если у тебя есть интересный рецепт или идея, которую ты хочешь поделиться с другими, не стесняйся добавить новый пост на нашем блоге. Мы всегда рады новым идеям и кулинарным экспериментам!</p>
                                 </div>
 
                                 <div class="col-lg-4">
-                                    <h4>How we help?</h4>
-                                    <p>Etiam vulputate urna id libero auctor maximus. Nulla dignissim ligula diam, in sollicitudin ligula congue quis turpis dui urna nibhs. </p>
+                                    <h4>Нужна помощь?</h4>
+                                    <p>Если вам нужна помощь с использованием нашего сайта, навигацией по разделам или чем-то другим, свяжитесь с нами. Мы готовы предоставить вам необходимую поддержку и решить любые возникшие проблемы.</p>
                                 </div>
-
-                                <div class="col-lg-4">
-                                    <h4>Pre-Sale Question</h4>
-                                    <p>Fusce dapibus nunc quis quam tempor vestibulum sit amet consequat enim. Pellentesque blandit hendrerit placerat. Integertis non.</p>
-                                </div>
-                            </div><!-- end row -->
+                            </div>
 
                             <hr class="invis">
 
@@ -168,10 +165,10 @@
                                     </form>
                                 </div>
                             </div>
-                        </div><!-- end page-wrapper -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <footer class="footer">
@@ -180,8 +177,8 @@
                     <div class="col-lg-8 offset-lg-2">
                         <div class="widget">
                             <div class="footer-text text-center">
-                                <a href="index.html"><img src="images/AksFood_black.png" alt="" class="img-fluid"></a>
-                                <p>Forest Time is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
+                                <a href="index"><img src="{% static 'blog/images/AksFood_black.png' %}" alt="" class="img-fluid"></a>
+                                <p>AksFood — это персональный блог, посвященный искусству еды, а также современным способам приготовления мамонта.</p>
                                 <div class="social">
                                     <a href="https://vk.com/stu_unger" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                             <a href="https://vk.com/stu_unger" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>
@@ -197,36 +194,34 @@
                                 <div class="newsletter-widget text-center">
                                     <form class="form-inline">
                                         <input type="text" class="form-control" placeholder="Enter your email address">
-                                        <button type="submit" class="btn btn-primary">Subscribe <i class="fa fa-envelope-open-o"></i></button>
+                                        <button type="submit" class="btn btn-primary">Подписаться <i class="fa fa-envelope-open-o"></i></button>
                                     </form>
-                                </div><!-- end newsletter -->
-                            </div><!-- end footer-text -->
-                        </div><!-- end widget -->
-                    </div><!-- end col -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <br>
                         <br>
-                        <div class="copyright">&copy; Forest Time. Design: <a href="http://html.design">HTML Design</a>.</div>
+                        <div class="copyright">&copy; AksFood: <a href="">AksFood R V</a>.</div>
                     </div>
                 </div>
-            </div><!-- end container -->
-        </footer><!-- end footer -->
+            </div>
+        </footer>
 
         <div class="dmtop">Scroll to Top</div>
         
-    </div><!-- end wrapper -->
+    </div>
 
-    <!-- Core JavaScript
+    <!-- JavaScript
     ================================================== -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAkADq7R0xf6ami9YirAM1N-yl7hdnYBhM "></script>
-   <!-- MAP & CONTACT -->
-    <script src="js/garden-map.js"></script>
+    <script src="{% static 'blog/js/jquery.min.js' %}"></script>
+    <script src="{% static 'blog/js/tether.min.js' %}"></script>
+    <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blog/js/custom.js' %}"></script>
+
 
 </body>
 </html>
