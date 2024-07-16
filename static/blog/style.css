@@ -171,6 +171,18 @@ a {
     background-color: #ffffff;
 }
 
+.video-container {
+    width: 100%;
+    max-width: 640px; /* Максимальная ширина видео */
+    margin: 0 auto; /* Центрирование контейнера */
+}
+
+.video-container video {
+    width: 100%; /* Видео занимает всю ширину контейнера */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+}
+
+
 .logo img {
     max-width: 324px;
     max-width: 100%;

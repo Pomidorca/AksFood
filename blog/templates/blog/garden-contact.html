@@ -155,13 +155,14 @@
 
                             <div class="row">
                                 <div class="col-lg-8 offset-lg-2">
-                                    <form class="form-wrapper">
-                                        <input type="text" class="form-control" placeholder="Your name">
-                                        <input type="text" class="form-control" placeholder="Email address">
-                                        <input type="text" class="form-control" placeholder="Phone">
-                                        <input type="text" class="form-control" placeholder="Subject">
-                                        <textarea class="form-control" placeholder="Your message"></textarea>
-                                        <button type="submit" class="btn btn-primary">Send <i class="fa fa-envelope-open-o"></i></button>
+                                    <form method="post" action="" class="form-wrapper">
+                                        {% csrf_token %}
+                                        <input type="text" id="name" name="name" required class="form-control" placeholder="Имя">
+                                        <input type="email" id="email" name="email" required class="form-control" placeholder="Email">
+                                        <input type="text" id="phone" name="phone" required class="form-control" placeholder="Телефон">
+                                        <input type="text" id="subject" name="subject" class="form-control" required placeholder="Тема">
+                                        <textarea id="message" name="message" required class="form-control" placeholder="Сообщение"></textarea>
+                                        <button type="submit" name="contact_form" class="btn btn-primary">Отправить <i class="fa fa-envelope-open-o"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -192,9 +193,10 @@
                                 <hr class="invis">
 
                                 <div class="newsletter-widget text-center">
-                                    <form class="form-inline">
-                                        <input type="text" class="form-control" placeholder="Enter your email address">
-                                        <button type="submit" class="btn btn-primary">Подписаться <i class="fa fa-envelope-open-o"></i></button>
+                                    <form method="post" action="" class="form-inline">
+                                        {% csrf_token %}
+                                        <input type="email" id="email" name="email" required class="form-control" placeholder="Email">
+                                        <button type="submit" name="email_form" class="btn btn-primary">Подписаться <i class="fa fa-envelope-open-o"></i></button>
                                     </form>
                                 </div>
                             </div>

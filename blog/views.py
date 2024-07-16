@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Recipe, Category
+from .models import Recipe, Category, Email, Contact
 from django.core.paginator import Paginator
 
 
@@ -14,7 +14,11 @@ def index(request):
     # Конец части кода, ответственной за пагинацию
     categorys = Category.objects.all()
     count = len(Recipe.objects.all()) - 1
-    gallery = Recipe.objects.order_by('image2')[:9] # 9 изображений для галереи
+    gallery = Recipe.objects.order_by('image2')[:9]  # 9 изображений для галереи
+    if request.method == 'POST':
+        if 'email_form' in request.POST:
+            email = request.POST.get('email')
+            Email.objects.create(email=email)
     if count >= 2:
         product1 = Recipe.objects.all()[count]
         product2 = Recipe.objects.all()[count - 1]
@@ -35,7 +39,11 @@ def category_recipes(request, category_id):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     count = len(Recipe.objects.all()) - 1
-    gallery = Recipe.objects.order_by('image2')[:9]  # 9 изображений для галереи
+    gallery = Recipe.objects.order_by('image2', 'category_id')[:9]  # 9 изображений для галереи
+    if request.method == 'POST':
+        if 'email_form' in request.POST:
+            email = request.POST.get('email')
+            Email.objects.create(email=email)
     if count >= 2:
         product1 = Recipe.objects.all()[count]
         product2 = Recipe.objects.all()[count - 1]
@@ -55,5 +63,42 @@ def category_recipes(request, category_id):
             'page_obj': page_obj,
             "gallery": gallery,
         })
+
+
 def add_post(request):
+    if request.method == 'POST':
+        if 'email_form' in request.POST:
+            email = request.POST.get('email')
+            Email.objects.create(email=email)
+        elif 'contact_form' in request.POST:
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
+            Contact.objects.create(name=name, email=email, phone=phone, subject=subject, message=message)
     return render(request, 'blog/garden-contact.html')
+
+
+def recipe_detail(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    recipe.views += 1
+    recipe.save()
+    all_category = Category.objects.all()
+    count = len(Recipe.objects.all()) - 1
+    gallery = Recipe.objects.order_by('image2')[:9]  # 9 изображений для галереи
+    if request.method == 'POST':
+        if 'email_form' in request.POST:
+            email = request.POST.get('email')
+            Email.objects.create(email=email)
+    if count >= 2:
+        product1 = Recipe.objects.all()[count]
+        product2 = Recipe.objects.all()[count - 1]
+        product3 = Recipe.objects.all()[count - 2]
+        return render(request, 'blog/garden-single.html', {'recipe': recipe, 'all_category': all_category,
+                                                           "gallery": gallery,
+                                                           'product1': product1, 'product2': product2,
+                                                           'product3': product3,
+                                                           })
+    else:
+        return render(request, 'blog/garden-single.html', {'recipe': recipe, 'all_category': all_category,})

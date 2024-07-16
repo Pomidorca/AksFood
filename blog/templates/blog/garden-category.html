@@ -53,9 +53,9 @@
                         <input type="text" class="form-control" placeholder="Что хотите найти?">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                     </form>
-                </div><!-- end newsletter -->
+                </div>
             </div>
-        </div><!-- end top-search -->
+        </div>
 
         <div class="topbar-section">
             <div class="container-fluid">
@@ -69,16 +69,16 @@
                             <a href="https://vk.com/stu_unger" data-toggle="tooltip" data-placement="bottom" title="Flickr"><i class="fa fa-flickr"></i></a>
                             <a href="https://vk.com/stu_unger" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
                             <a href="https://vk.com/stu_unger" data-toggle="tooltip" data-placement="bottom" title="Google+"><i class="fa fa-google-plus"></i></a>
-                        </div><!-- end social -->
-                    </div><!-- end col -->
+                        </div>
+                    </div>
 
                     <div class="col-lg-4 hidden-md-down">
-                    </div><!-- end col -->
+                    </div>
 
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="topsearch text-right">
                             <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search"></i> Поиск</a>
-                        </div><!-- end search -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,11 +90,11 @@
                     <div class="col-md-12">
                         <div class="logo">
                             <a href=""><img src="{% static 'blog/images/AksFood.png' %}" alt=""></a>
-                        </div><!-- end logo -->
+                        </div>
                     </div>
-                </div><!-- end row -->
-            </div><!-- end header-logo -->
-        </div><!-- end header -->
+                </div>
+            </div>
+        </div>
 
         <header class="header">
             <div class="container">
@@ -151,27 +151,27 @@
                                 <div class="blog-box row">
                                     <div class="col-md-4">
                                         <div class="post-media">
-                                            <a href="garden-single.html" title="">
+                                            <a href="{% url 'recipe_detail' recipe.id %}" title="">
                                                 <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
+                                        </div>
+                                    </div>
 
                                     <div class="blog-meta big-meta col-md-8">
-                                        <span class="bg-aqua"><a href="garden-category.html" title="">{{ recipe.category }}</a></span>
-                                        <h4><a href="garden-single.html" title="">{{ recipe.title }}</a></h4>
+                                        <span class="bg-aqua"><a href="{% url 'category_recipes' recipe.category_id %}" title="">{{ recipe.category }}</a></span>
+                                        <h4><a href="{% url 'recipe_detail' recipe.id %}" title="">{{ recipe.title }}</a></h4>
                                         <p>{{ recipe.description }}</p>
-                                        <small><a href="garden-category.html" title=""><i class="fa fa-eye"></i> 1887</a></small>
-                                        <small><a href="garden-single.html" title="">{{ recipe.created_at }}</a></small>
+                                        <small><a href="{% url 'recipe_detail' recipe.id %}" title=""><i class="fa fa-eye"></i>{{ recipe.views }}</a></small>
+                                        <small><a href="{% url 'recipe_detail' recipe.id %}" title="">{{ recipe.created_at }}</a></small>
                                         <small><a href="#" title="">AksFood</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
+                                    </div>
+                                </div>
 
                                 <hr class="invis">
                                 {% endfor %}
-                            </div><!-- end blog-list -->
-                        </div><!-- end page-wrapper -->
+                            </div>
+                        </div>
 
                         <hr class="invis">
                         <div class="row">
@@ -198,10 +198,10 @@
                                         </li>
                                     </ul>
                                 </nav>
-                            </div><!-- end col -->
-                        </div><!-- end row -->
+                            </div>
+                        </div>
 
-                    </div><!-- end col -->
+                    </div>
 
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                         <div class="sidebar">
@@ -213,7 +213,7 @@
                                     </div>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                                 </form>
-                            </div><!-- end widget -->
+                            </div>
 
                             <div class="widget">
                                 <h2 class="widget-title">Новинки</h2>
@@ -243,8 +243,8 @@
                                             </div>
                                         </a>
                                     </div>
-                                </div><!-- end blog-list -->
-                            </div><!-- end widget -->
+                                </div>
+                            </div>
 
                             <div class="widget">
                                 <h2 class="widget-title">Реклама</h2>
@@ -303,9 +303,10 @@
                                 <hr class="invis">
 
                                 <div class="newsletter-widget text-center">
-                                    <form class="form-inline">
-                                        <input type="text" class="form-control" placeholder="Enter your email address">
-                                        <button type="submit" class="btn btn-primary">Подписаться <i class="fa fa-envelope-open-o"></i></button>
+                                    <form method="post" action="" class="form-inline">
+                                        {% csrf_token %}
+                                        <input type="email" id="email" name="email" required class="form-control" placeholder="Email">
+                                        <button type="submit" name="email_form" class="btn btn-primary">Подписаться <i class="fa fa-envelope-open-o"></i></button>
                                     </form>
                                 </div>
                             </div>
