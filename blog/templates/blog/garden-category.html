@@ -49,8 +49,8 @@
         <div class="collapse top-search" id="collapseExample">
             <div class="card card-block">
                 <div class="newsletter-widget text-center">
-                    <form class="form-inline">
-                        <input type="text" class="form-control" placeholder="Что хотите найти?">
+                    <form class="form-inline" method="get" action="{% url 'search' %}">
+                        <input type="text" name="q" class="form-control" placeholder="Что хотите найти?">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
@@ -207,9 +207,9 @@
                         <div class="sidebar">
                             <div class="widget">
                                 <h2 class="widget-title">Поиск</h2>
-                                <form class="form-inline search-form">
+                                <form class="form-inline search-form" method="get" action="{% url 'search' %}">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input name="q" type="text" class="form-control" placeholder="">
                                     </div>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                                 </form>
@@ -219,7 +219,7 @@
                                 <h2 class="widget-title">Новинки</h2>
                                 <div class="blog-list-widget">
                                     <div class="list-group">
-                                        <a href="garden-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <a href="{% url 'recipe_detail' product1.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="w-100 justify-content-between">
                                                 <img src="{{ product1.image.url }}" alt="{{ product1.title }}" class="img-fluid float-left">
                                                 <h5 class="mb-1">{{ product1.title }}</h5>
@@ -227,7 +227,7 @@
                                             </div>
                                         </a>
 
-                                        <a href="garden-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <a href="{% url 'recipe_detail' product2.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="w-100 justify-content-between">
                                                 <img src="{{ product2.image.url }}" alt="{{ product2.title }}" class="img-fluid float-left">
                                                 <h5 class="mb-1">{{ product2.title }}</h5>
@@ -235,7 +235,7 @@
                                             </div>
                                         </a>
 
-                                        <a href="garden-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <a href="{% url 'recipe_detail' product3.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="w-100 last-item justify-content-between">
                                                 <img src="{{ product3.image.url }}" alt="{{ product3.title }}" class="img-fluid float-left">
                                                 <h5 class="mb-1">{{ product3.title }}</h5>
@@ -255,11 +255,11 @@
                                 </div>
                             </div>
 
-                           <div class="widget">
+                            <div class="widget">
                                 <h2 class="widget-title">Галерея</h2>
                                 <div class="instagram-wrapper clearfix">
                                     {% for gall in gallery %}
-                                    <a href="#"><img src="{{ gall.image2.url }}" alt="" class="img-fluid"></a>
+                                    <a href="{% url 'recipe_detail' gall.id %}"><img src="{{ gall.image2.url }}" alt="" class="img-fluid"></a>
                                     {% endfor %}
 
                                 </div>
@@ -275,7 +275,6 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

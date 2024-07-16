@@ -35,7 +35,7 @@ def category_recipes(request, category_id):
     all_category = Category.objects.all()
     category = get_object_or_404(Category, pk=category_id)
     recipes = Recipe.objects.filter(category=category)
-    paginator = Paginator(recipes, 10)  # 10 рецептов на странице
+    paginator = Paginator(recipes, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     count = len(Recipe.objects.all()) - 1
@@ -102,3 +102,34 @@ def recipe_detail(request, pk):
                                                            })
     else:
         return render(request, 'blog/garden-single.html', {'recipe': recipe, 'all_category': all_category,})
+
+def search_view(request):
+    query = request.GET.get('q')
+    paginator = Paginator(query, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    all_category = Category.objects.all()
+    count = len(Recipe.objects.all()) - 1
+    if request.method == 'POST':
+        if 'email_form' in request.POST:
+            email = request.POST.get('email')
+            Email.objects.create(email=email)
+    results = Recipe.objects.none()
+    if query:
+        results = Recipe.objects.filter(title__icontains=query) | Recipe.objects.filter(description__icontains=query)
+        paginator = Paginator(results, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        gallery = Recipe.objects.order_by('image2')[:9]  # 9 изображений для галереи
+    if count >= 2:
+        product1 = Recipe.objects.all()[count]
+        product2 = Recipe.objects.all()[count - 1]
+        product3 = Recipe.objects.all()[count - 2]
+        return render(request, 'blog/garden-search.html', {'results': results, 'query': query, 'page_obj': page_obj,
+                                                           'all_category': all_category,
+                                                           "gallery": gallery,
+                                                           'product1': product1, 'product2': product2,
+                                                           'product3': product3,})
+    else:
+        return render(request, 'blog/garden-search.html', {'results': results, 'query': query, 'page_obj': page_obj,
+                                                           'all_category': all_category})
