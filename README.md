@@ -1,5 +1,5 @@
 AksFood Blog
-Описание проекта
+
 
 AksFood Blog - это кулинарный блог, разработанный на Django, поддерживающий создание, редактирование и удаление рецептов с добавлением фотографий и видео. Также имеется возможность фильтрации рецептов по категориям и поиска по ключевым словам. В проекте реализована пагинация для удобного просмотра большого количества рецептов.
 Установка и настройка
@@ -13,21 +13,21 @@ AksFood Blog - это кулинарный блог, разработанный 
 
     Клонируйте репозиторий:
 
-git clone https://github.com/ваш-логин/aksfood-blog.git
-cd aksfood-blog
+    git clone https://github.com/ваш-логин/aksfood-blog.git
+    cd aksfood-blog
 
 Создайте и активируйте виртуальное окружение:
 
-python -m venv env
-source env/bin/activate  # Для Windows используйте `env\Scripts\activate`
+    python -m venv env
+    source env/bin/activate  # Для Windows используйте `env\Scripts\activate`
 
 Выполните миграции для настройки базы данных:
 
-python manage.py migrate
+    python manage.py migrate
 
 Создайте суперпользователя для доступа к административной панели:
 
-python manage.py createsuperuser
+    python manage.py createsuperuser
 
 Запустите сервер разработки:
 
